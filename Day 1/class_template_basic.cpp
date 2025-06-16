@@ -18,7 +18,7 @@ T getSecond()
 // And the double use of template class again to delcare same T again
 
 template <typename T>
-
+//Syntax:  Return_type templateClass::templateClassFunction()
 T Pair<T>::getFirst()
 {
     return x;
