@@ -69,6 +69,8 @@ Function template:
 
 * Usage Ex: This is useful when you need the same operation, like sorting for various data types.
 
+Exmaple 1:
+
 #include <iostream>
 using namespace std;
 
@@ -82,3 +84,8 @@ int main() {
   cout << myMax<char>('c', 'g') << endl;
   return 0;
 }
+
+
+
+
+Exmaple 2:
