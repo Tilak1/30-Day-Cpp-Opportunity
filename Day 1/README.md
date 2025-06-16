@@ -1,91 +1,129 @@
-# Day 1: 
 
-STL and Algorithm: 
+---
 
-* STL Containers:
-  std::istream_iterator
-  std:map
-  std:list
-  std:set
-  std:vector and inbuilt vector's iterator
+# 📘 Day 1: STL & Templates
 
-  '''
-  * Random access iterator allows - --it, but other iterators won't. 
- 
+## 🔧 STL and Algorithms
 
-  vector<int> v = {10, 20, 30, 40, 50};
-    vector<int>::iterator i = v.begin();  
+### ✅ Common STL Containers
 
-    i = next(i); 
-    cout << (*i) << " ";
+* `std::istream_iterator`
+* `std::map`
+* `std::list`
+* `std::set`
+* `std::vector` (with random access iterator)
 
-    i = next(i, 2);
-    cout << (*i) << " ";
+---
 
-    i = prev(i);
-    cout << (*i) << " ";
+### 🔄 Iterators in STL
+![image](https://github.com/user-attachments/assets/67cde477-5a66-4a62-8de9-d8c623271218)
+
+#### 🔹 Random Access Iterator (e.g., `std::vector`)
+
+Random access iterators support:
+
+* `++it`, `--it`
+* `it + n`, `it - n`
+* `std::next(it, n)` and `std::prev(it, n)`
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {10, 20, 30, 40, 50};
+    vector<int>::iterator i = v.begin();
+
+    i = next(i);           // points to 20
+    cout << *i << " ";
+
+    i = next(i, 2);        // points to 40
+    cout << *i << " ";
+
+    i = prev(i);           // points to 30
+    cout << *i << endl;
+
     return 0;
+}
+```
 
-   with a std::forward_list<int>::iterator and you’ll get a compile error, because forward_list only supports ++i.
-    
-    std::forward_list<int> fl = {1, 2, 3};
+> ❌ Not supported with `std::forward_list`:
+
+```cpp
+#include <forward_list>
+using namespace std;
+
+int main() {
+    forward_list<int> fl = {1, 2, 3};
     auto it = fl.begin();
-    // --it;   ❌ Compile error: no operator--
-    
+    // --it; // ❌ Compile error: no operator--
+}
+```
 
-* Bidirectional Iterators
-Container: list, map, set
-    
-    cpp
-    Copy
-    Edit
-    #include <iostream>
-    #include <list>
-    
-    int main() {
-        std::list<int> lst = {1, 2, 3};
-        auto it = lst.end();
-        while (it != lst.begin()) {
-            --it;
-            std::cout << *it << " ";
-        }
+---
+
+#### 🔸 Bidirectional Iterators
+
+**Containers**: `std::list`, `std::map`, `std::set`
+
+```cpp
+#include <iostream>
+#include <list>
+using namespace std;
+
+int main() {
+    list<int> lst = {1, 2, 3};
+    auto it = lst.end();
+
+    while (it != lst.begin()) {
+        --it;
+        cout << *it << " ";
     }
+}
+```
 
-  ![image](https://github.com/user-attachments/assets/43cfeca2-451b-4c4a-ba93-1e23addfaebf)
+---
 
-  '''
+### ⚙️ STL Internals & Templates
 
-* STL & Algorithm libraries use c++ 'Template' to maintain the data agnostic setup. STL containers are built internally using class templates and algorithm functions are built internally using function templates. 
-* sort and binary_search need start & end indexing.  
+* STL containers are implemented using **class templates**
+* STL algorithms (like `sort`, `binary_search`) are built using **function templates**
+* This enables **type-agnostic**, reusable code.
 
+---
 
-Templates: 
+## 🧠 C++ Templates
 
+### ✨ Why Templates?
 
+Templates allow you to write **generic code** that works with any data type. The compiler will automatically generate the correct type-specific version of your function or class.
 
-* Templates offer a way to write your code once and use it with various data types. Compiler will generate a new definition for the data type you use in the code. Atleast from the programmera perspective it will be data type agnostic. 
-* STL containers are built internally using class templates and algorithm functions are built internally using function templates.
-Function template: 
+### 🔧 Function Template Example
 
-* Usage Ex: This is useful when you need the same operation, like sorting for various data types.
-
-Exmaple 1:
-
+```cpp
 #include <iostream>
 using namespace std;
 
 template <typename T>
 T myMax(T x, T y) {
-  return (x > y) ? x : y;
+    return (x > y) ? x : y;
 }
 
 int main() {
-  cout << myMax<int>(3, 7) << endl;
-  cout << myMax<char>('c', 'g') << endl;
-  return 0;
+    cout << myMax<int>(3, 7) << endl;
+    cout << myMax<char>('c', 'g') << endl;
+    return 0;
 }
+```
 
+---
 
+## 📌 Notes
 
+* `sort` and `binary_search` need both **start** and **end** iterators
+* Iterators are classified based on capabilities:
+  Input, Output, Forward, Bidirectional, and Random Access
+* `std::vector` supports full range of iterator operations (random access)
 
-Exmaple 2:
+---
