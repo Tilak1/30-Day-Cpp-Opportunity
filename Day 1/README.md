@@ -2,6 +2,7 @@
 ---
 
 # 📘 Day 1: STL & Templates
+* Unlike C, C++ offers exception handling, template based data type independent code, wide STL algo support. 
 
 ## 🔧 STL and Algorithms
 
