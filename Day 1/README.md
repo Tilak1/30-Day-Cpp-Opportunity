@@ -5,6 +5,7 @@
 * Unlike C, C++ offers exception handling, template based data type independent code, wide STL algo support. 
 
 ## 🔧 STL and Algorithms
+* Commonly used data structures are available lists, stacks, maps etc
 
 ### ✅ Common STL Containers
 
