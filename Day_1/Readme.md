@@ -1,36 +1,178 @@
-Day 1 - CPP Basics: 
 
-Variables: 
-
-![image](https://github.com/user-attachments/assets/385e9c41-0685-4e34-9766-8793e430ac15)
-
-* Static: Memory init only once during lifetime and persists across function calls. Memory for static variables is allocated in the data segment, not the stack.
-* Static Global: Not accessible to other files in the project. 
-
-Memory allocation types: 
-
-* Stack is used for fast, automatic allocation of local variables and function parameters.
-* Heap is used for dynamic memory allocation when the size or lifetime of data is not known at compile time.
-* The data segment is a dedicated memory region for storing global and static variables, distinguishing between initialized and uninitialized data. 
-
-Variables are typically allocated memory in stack. 
-
-Datatypes:
-* float vs double: single (4 byte) vs double precision (8 byte)
-* Big variables: unsigned long long int (64 bit), unsigned __int128_t (128 bit), Big int (GMP used for cryptography)
-* wchar_t provides a way to handle a wider range of characters than the standard char type, particularly useful for Unicode and other character sets requiring more than one byte for representation 
-  wchar_t myWideChar = L'é'; // 'é' is a wide character (not in ASCII)
-  wchar_t* myWideString = L"Hello, world!"; // Wide string literal
-
-Extern: 
-* If the varibale scope is not there (i.e if definition is not present in that place for now), use extern to search for the definition and include it in the present scope. 
-![image](https://github.com/user-attachments/assets/5bab6271-7837-4e23-9172-5ed79d3634e6)
-
-Scope: 
-* Functions, Loops, and Conditional Statements Create a New Scope: Each function, loop, or conditional block introduces a new scope.
-* Variables declared inside the block are local to that scope.
-* Outer Scope Variables Are Accessible in Inner Scopes: Variables from an outer scope can be used inside inner scopes unless overshadowed. However, inner scope variables are not accessible outside their block.
+---
+# 🚀 Day 1 – C++ Basics
 
 
-Ref: 
-* GeeksForGeeks C++
+C++ is a **statically typed** language. Unlike dynamic languages (which offer flexibility as variable types can change during execution), C++ checks types **at compile time**, enabling optimizations and predictable behavior.
+
+### 🧠 Is C++ Completely Static?
+
+Not entirely. C++ also supports **dynamic behavior** through:
+
+- **Virtual Functions**: Enable dynamic polymorphism — the correct function is selected at runtime based on object type.
+- **RTTI (Run-Time Type Information)**: Allows inspection of object types during runtime.
+
+---
+
+## 📦 Variables
+
+![Variables](https://github.com/user-attachments/assets/385e9c41-0685-4e34-9766-8793e430ac15)
+
+---
+
+## 🔑 Keywords
+
+### `static`
+- Memory is initialized **once** and persists across function calls.
+- Memory is allocated in the **data segment**, not on the stack.
+- Useful for caching/memoization.
+
+```cpp
+#include <iostream>
+#include <vector>
+
+int fibonacci(int n) {
+    static std::vector<int> memo(100, 0); // cache
+    if (n <= 1) return n;
+    if (memo[n] != 0) return memo[n];
+    memo[n] = fibonacci(n - 1) + fibonacci(n - 2);
+    return memo[n];
+}
+
+int main() {
+    std::cout << "Fibonacci(10): " << fibonacci(10) << std::endl;
+    std::cout << "Fibonacci(10): " << fibonacci(10) << std::endl;
+    return 0;
+}
+````
+
+* **Static global variables**: Limited to file scope — not accessible outside.
+
+---
+
+## 🆚 `const` vs `#define`
+
+* `#define`: Textual replacement, no type safety.
+* `const`: Type-safe, scoped, and debuggable.
+
+![const vs macro](https://github.com/user-attachments/assets/cd0ff904-589e-44ca-ace2-87761f29c83a)
+
+---
+
+## 🪄 `auto` Type Deduction
+
+* Deduces type from initializer.
+* Great for long STL types or lambda captures.
+* Beware: `auto` uses **default type rules** for literals.
+
+```cpp
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+int main() {
+    auto a = 3;                 // int
+    auto b = 0.2f;              // float
+    auto c = 3.9876543245;      // double
+    auto d = 23456789987654LL; // long long
+
+    if ((typeid(a) == typeid(int)) &&
+        (typeid(b) == typeid(float)) &&
+        (typeid(c) == typeid(double)) &&
+        (typeid(d) == typeid(long long)))
+        cout << "verified\n";
+
+    return 0;
+}
+```
+
+📌 Use suffixes like `f`, `LL`, `u` to guide `auto`.
+
+---
+
+## 🔢 Literals
+
+### Integer
+
+* **Prefixes**:
+
+  * `013` → Octal
+  * `0b11` → Binary (C++14+)
+  * `0x23A` → Hexadecimal
+
+* **Suffixes**:
+
+  * `124u` → Unsigned int
+  * `124L` → Long
+  * `124LL` → Long long
+
+### Floating Point
+
+| Literal  | Type                |
+| -------- | ------------------- |
+| `3.14`   | double              |
+| `3.14f`  | float               |
+| `2.1e-3` | double (scientific) |
+
+---
+
+## 🔡 Char & Wide Char
+
+Used for Unicode and non-ASCII characters:
+
+```cpp
+wchar_t chr = L'é';
+wchar_t* myWideString = L"Hello, world!";
+```
+
+![Wide Char](https://github.com/user-attachments/assets/41a6699b-9a7c-4a7a-aa0c-9a7e6a0782b3)
+
+---
+
+## 🧠 Memory Allocation
+
+| Region       | Used for                           |
+| ------------ | ---------------------------------- |
+| Stack        | Local variables, fast, auto-free   |
+| Heap         | `new`, `malloc`, manual management |
+| Data Segment | Static/global variables            |
+
+---
+
+## 📏 Data Types
+
+| Type                 | Notes                                        |
+| -------------------- | -------------------------------------------- |
+| `float` / `double`   | 32-bit / 64-bit precision                    |
+| `unsigned long long` | 64-bit unsigned                              |
+| `__int128_t`         | 128-bit integer (non-standard, cryptography) |
+| `wchar_t`            | Unicode characters                           |
+
+---
+
+## 🌍 `extern` Keyword
+
+Used to reference a variable **declared elsewhere**:
+
+```cpp
+extern int sharedCounter;
+```
+
+![extern](https://github.com/user-attachments/assets/5bab6271-7837-4e23-9172-5ed79d3634e6)
+
+---
+
+## 🧾 Scope Rules
+
+* Every `{}` block (functions, loops, conditionals) introduces a **new scope**.
+* Inner scopes can access outer scope variables.
+* Inner variables **cannot** be accessed outside their block.
+
+---
+
+## 📚 References
+
+* [GeeksForGeeks – C++](https://www.geeksforgeeks.org/c-plus-plus/)
+
+---
+
