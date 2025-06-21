@@ -1,8 +1,13 @@
 
 ---
 
-# 📘 Day 1: STL & Templates
+# 📘 Day 1: C++ Basics, STL & Templates
+
+## C++ Basics: 
 * Unlike C, C++ offers exception handling, template based data type independent code, wide STL algo support. 
+* This line imports the entire std namespace into the program's current scope. The std namespace contains all the standard C++ library functions and objects like cout and cin.
+*     By including this line, you can directly write cout instead of std::cout.
+
 
 ## 🔧 STL and Algorithms
 * Commonly used data structures are available lists, stacks, maps etc
