@@ -1,0 +1,74 @@
+This involves several interconnected C++ topics. Here's what you should learn:
+
+## **Core Topics to Study:**
+
+### 1. **Lambda Expressions (C++11)**
+- **What to learn**: Lambda syntax, capture clauses, return types
+- **Keywords**: `[capture list] (parameters) -> return_type { body }`
+- **Resources**: Search for "C++ lambda expressions", "C++ lambda capture"
+
+### 2. **std::thread and Multithreading (C++11)**
+- **What to learn**: Creating threads, joining threads, thread safety
+- **Keywords**: `std::thread`, `std::mutex`, `std::atomic`
+- **Resources**: "C++ multithreading", "C++ std::thread tutorial"
+
+### 3. **STL Containers and emplace methods (C++11)**
+- **What to learn**: `std::vector`, difference between `push_back()` and `emplace_back()`
+- **Keywords**: "C++ emplace vs push", "C++ vector methods"
+- **Resources**: "C++ STL containers", "C++ move semantics"
+
+## **Learning Path:**
+
+```cpp
+// 1. Start with basic lambdas
+auto add = [](int a, int b) { return a + b; };
+
+// 2. Learn capture clauses
+int x = 10;
+auto by_value = [=]() { return x; };      // Copies x
+auto by_ref = [&]() { return x; };        // References x
+
+// 3. Then combine with threads
+std::thread t([=]() { 
+    std::cout << "Hello from thread\n"; 
+});
+t.join();
+
+// 4. Finally, the pattern from your code
+std::vector<std::thread> threads;
+for (int i = 0; i < 4; ++i) {
+    threads.emplace_back([=]() {
+        // Each thread gets its own copy of i
+    });
+}
+```
+
+## **Specific Book/Course Topics:**
+
+1. **"Modern C++ Features"** or **"C++11/14/17 Features"**
+2. **"Concurrent Programming in C++"**
+3. **"Lambda Expressions and Functional Programming in C++"**
+4. **"STL Containers and Algorithms"**
+
+## **Quick Reference Search Terms:**
+- "C++ lambda capture by value vs reference"
+- "C++ thread vector pattern"
+- "C++ emplace_back perfect forwarding"
+- "C++ lambda in multithreading"
+
+## **Common Pitfalls to Study:**
+- Lambda capture in loops (the exact issue in your code)
+- Thread lifetime management
+- Race conditions with reference captures
+- When to use value vs reference capture
+
+## **Recommended Learning Order:**
+1. **Lambdas alone** (1-2 days)
+2. **Basic threading** (2-3 days)
+3. **STL containers** (1-2 days)
+4. **Combining them** (1-2 days)
+
+The pattern `vector.emplace_back([=]{...})` is very common in modern C++ for creating thread pools, task queues, and parallel algorithms, so it's definitely worth mastering!
+
+
+Check All_Gpu_Graph_936pm.cu in Day 10_Graphs for more details
