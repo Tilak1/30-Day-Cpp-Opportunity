@@ -2,7 +2,6 @@
 ---
 # Day 2 OOP Review: 
 
-````markdown
 # 🛠️ C++ OOPs Quick Notes
 
 This document summarizes key C++ OOP concepts with explanations, images, and code snippets.
@@ -133,4 +132,215 @@ int main() {
 * Typically called **at the end of the `main()` function** when objects are destroyed.
 
 ---
+
+# Inheritance: 
+
+* In Derived class, we can't access base class private members - basics of encapsulation. Can only do Public.  But can be still accessed if public has a setter and getter method. If its a protected class, it can be accessed from the derived class. - like you can do a simple assign, but the same wont work for a private member. 
+** Also for a base private 'c', we cant define its value from main() - So, any class which if it has to define the private variable from main - needs to have a public setter method set(value){c = value;}. Thus preserving, the private encapsulation through this indirect way of assigning the value to a private variable. 
+
+See Inheritance_Basic.cpp - where set and get methods are used
+
+Inheritance Access Specifiers Grid Map: 
+
+<img width="685" height="472" alt="image" src="https://github.com/user-attachments/assets/bda0c2ab-07d6-412e-a894-4ca400f76376" />
+
+In case of private inhertinace, every of base class become private to the derived and 
+
+---
+
+# 🌟 C++ Inheritance Access Cheat Sheet
+
+This README explains how **public**, **protected**, and **private inheritance** affect access to base class members, with small example programs.
+
+---
+
+## 🔑 Base Class Setup
+
+```cpp
+class Base {
+private:
+    int priv = 1;
+protected:
+    int prot = 2;
+public:
+    int pub = 3;
+};
+````
+
+---
+
+## 1️⃣ Public Inheritance
+
+```cpp
+class Derived : public Base { ... };
+```
+
+* `public` → `public` in Derived
+* `protected` → `protected` in Derived
+* `private` → inaccessible
+
+### Example
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+private:
+    int priv = 1;
+protected:
+    int prot = 2;
+public:
+    int pub = 3;
+};
+
+class Derived : public Base {
+public:
+    void show() {
+        // cout << priv;  ❌ not accessible
+        cout << "prot: " << prot << endl;  // ✅ accessible
+        cout << "pub: " << pub << endl;    // ✅ accessible
+    }
+};
+
+int main() {
+    Derived d;
+    d.show();
+    cout << d.pub << endl;  // ✅ public stays public, accessible
+    // cout << d.prot;      ❌ error: prot is protected
+}
+```
+
+### Output
+
+```
+prot: 2
+pub: 3
+3
+```
+
+---
+
+## 2️⃣ Protected Inheritance
+
+```cpp
+class Derived : protected Base { ... };
+```
+
+* `public` → `protected` in Derived
+* `protected` → `protected` in Derived
+* `private` → inaccessible
+
+### Example
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+private:
+    int priv = 1;
+protected:
+    int prot = 2;
+public:
+    int pub = 3;
+};
+
+class Derived : protected Base {
+public:
+    void show() {
+        cout << "prot: " << prot << endl;  // ✅ accessible
+        cout << "pub: " << pub << endl;    // ✅ accessible (became protected)
+    }
+};
+
+int main() {
+    Derived d;
+    d.show();
+    // cout << d.pub;    ❌ error: pub is now protected
+    // cout << d.prot;   ❌ error: prot is protected
+}
+```
+
+### Output
+
+```
+prot: 2
+pub: 3
+```
+
+---
+
+## 3️⃣ Private Inheritance
+
+```cpp
+class Derived : private Base { ... };
+```
+
+* `public` → `private` in Derived
+* `protected` → `private` in Derived
+* `private` → inaccessible
+
+### Example
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+private:
+    int priv = 1;
+protected:
+    int prot = 2;
+public:
+    int pub = 3;
+};
+
+class Derived : private Base {
+public:
+    void show() {
+        cout << "prot: " << prot << endl;  // ✅ accessible (became private)
+        cout << "pub: " << pub << endl;    // ✅ accessible (became private)
+    }
+};
+
+int main() {
+    Derived d;
+    d.show();
+    // cout << d.pub;    ❌ error: pub is now private
+    // cout << d.prot;   ❌ error: prot is private
+}
+```
+
+### Output
+
+```
+prot: 2
+pub: 3
+```
+
+---
+
+## 📊 Summary Table
+
+| Inheritance Type | public →  | protected → | private →    |
+| ---------------- | --------- | ----------- | ------------ |
+| `public`         | public    | protected   | inaccessible |
+| `protected`      | protected | protected   | inaccessible |
+| `private`        | private   | private     | inaccessible |
+
+
+Also check Inheritance_Access_Specifiers.cpp
+---
+
+✅ **Key Takeaways**
+
+* Only public and protected members are inherited.
+* Private members are never directly accessible, but you can expose them using base class getters/setters.
+* Inheritance type controls how inherited members are seen in the derived class **and from outside.**
+
+---
+
+
+
 
