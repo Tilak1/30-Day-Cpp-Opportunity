@@ -338,7 +338,7 @@ Also check Inheritance_Access_Specifiers.cpp
 * Only public and protected members are inherited.
 * Private members are never directly accessible, but you can expose them using base class getters/setters.
 * Inheritance type controls how inherited members are seen in the derived class **and from outside.**
-
+* Also the constructor/destructors flow in an inheritance model, as to how it would pass from a derived parameterised / default to respective Base constructor is a standard pattern i.e In Constructors - Base -> Derived and in Destructors = Derived -> Base. 
 ---
 
 
