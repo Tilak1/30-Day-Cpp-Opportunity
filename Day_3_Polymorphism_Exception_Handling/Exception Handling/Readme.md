@@ -1,4 +1,3 @@
-Here’s a clean and well-formatted **GitHub README.md** you can copy for your repository:
 
 ---
 
