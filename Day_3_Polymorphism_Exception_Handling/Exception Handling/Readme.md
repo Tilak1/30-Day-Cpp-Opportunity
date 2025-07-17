@@ -43,7 +43,7 @@ This repository contains simple C++ programs demonstrating:
 * **Highlights:**
 
   * Safely reads numeric input from the user (avoids bad input).
-  * Uses `if constexpr` for compile-time type checking.
+  * Uses `if constexpr` for compile-time type checking. Check the below ref reg the use of 'constexpr'
   * Catches floating-point division by zero.
 
 * **Example Run:**
@@ -74,3 +74,7 @@ This repository contains simple C++ programs demonstrating:
 * Make sure you have **C++17 or later** for `if constexpr` support in `Exception_Advanced.cpp`.
 
 ---
+
+Ref: 
+
+* https://www.learnqt.guide/modern-cpp-constexpr
