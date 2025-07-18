@@ -48,7 +48,9 @@ for (it = num.begin(); it != num.end(); ++it)
 
 ![STL Overview](image.png)
 
-![Iterator Issue Example](image-1.png)
+Limitations and relations between iterators and stl containers: 
+
+<img width="1902" height="1282" alt="image" src="https://github.com/user-attachments/assets/44e8efaf-c465-44ef-9c69-4f848c2a8d27" />
 
 Lets see more in depth examples in below sections: 
 
