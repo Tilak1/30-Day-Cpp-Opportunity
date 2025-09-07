@@ -1,0 +1,91 @@
+--- C++: 
+
+Big O from Udemy enrolled courss interesting 
+modernc++ opened chrome things 
+https://www.geeksforgeeks.org/dsa/lru-cache-implementation-using-double-linked-lists/
+
+--- Finding the sugar device 
+
+--- ECDF:  
+
+
+
+Setup on H100 and seeing the results ECDF better viewing and tell by Monday night to Ali.
+
+
+
+
+--- DOCA:  
+For the present task: 
+
+Circular buffer - DMA - read for that knowledge only - dont deviate - ch13 - Dma ring buffer and come back 
+
+Analyze neagin's C code
+
+Where is DOCA or DPDK ? - Until 26 Aug - DPDK results can be derived. 
+----
+
+BSI: Cuda@2028$
+
+
+1544844497278
+
+----
+
+
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+class student{
+    private: 
+    vector<int> scores; 
+    
+    public: 
+    
+    void input(){for(int i=0;i<6;i++){cin>>scores[i];}}
+    
+    int calculateTotalScore(){
+    
+        int sum=0; 
+        
+        for(int i=0;i<6;i++){sum += scores[i];}
+        
+        return sum;     
+        
+    }
+    
+}; 
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int n; 
+    cin>>n; 
+    
+    student s[n];
+    
+    for (int i=0; i< n; i++)
+    {
+        s[i].input(); 
+        //s[i].calculateTotalScore(); 
+        
+    } 
+    
+    int count = 0;
+    
+    for (int i=1; i< n; i++)
+    {    
+        if (s[0].calculateTotalScore()<s[i].calculateTotalScore())
+        {count++; }
+        
+    } 
+    
+    cout <<"/n" << count; 
+    return 0;
+}
+
+
+
